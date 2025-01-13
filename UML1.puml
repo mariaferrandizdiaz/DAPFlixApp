@@ -1,0 +1,141 @@
+@startuml
+interface Data.WebScraping.MovieScraper {
+~ List<Movie> getSchedule()
+}
+
+class Data.WebScraping.MoviesDataApi {
+- List<Cinema> cinemas
+- String driver
+- List<Movie> yearRanking
+- List<String[]> yearlyData
+- Movie mostViewedMovie
+- Movie mostViewedMovieSpanish
+- void loadCineData()
+- void loadCineDataByType(String,String,String)
+- void loadYearRankingData()
+- void loadMostViewed()
++ void loadYearRevenueData()
++ void loadSpanishMostViewed()
++ int getMoviesCount()
++ List<Movie> getAllMoviesList()
++ List<Movie> getMoviesByCinema(String)
++ List<String> getCinemas()
++ List<String> getCinemasWithSize()
++ Movie getMostViewedMovieSpanish()
++ List<Movie> getYearRanking()
++ Movie getMostViewed()
++ List<String[]> getYearRevenueData()
+}
+
+
+class Data.WebScraping.ScraperFactory {
++ {static} MovieScraper createScraper(String,String,String,String)
+}
+
+class View.ResponseView {
+- {static} Gson gson
++ {static} String render(Message)
++ {static} String render(List<Movie>)
++ {static} String render(Movie)
+}
+
+
+class Data.TMDBApi.TMDBApi {
+- {static} TMDBApi instance
+- {static} String API_KEY
++ {static} TMDBApi getInstance()
++ List<Movie> fetchMovies(String)
++ Message getTotalMovies(String)
++ List<Movie> fetchSeries(String)
++ Message getTotalSeries(String)
+}
+
+
+abstract class Data.WebScraping.BaseScraper {
+- String driverPath
+# WebDriver createWebDriver()
+# void waitForElement(WebDriver,By)
+}
+
+
+class Model.Movie {
+- String title
+- String info
+- String image
++ String getTitle()
++ String getInfo()
++ String getImage()
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+
+
+class Model.Cinema {
+- String cinemaName
+- List<Movie> movies
++ String getCinemaName()
++ void setCinemaName(String)
++ int getMovieCount()
++ List<Movie> getMovies()
+}
+
+
+class Data.WebScraping.MTenerifeScraper {
+- String baseUrl
++ List<Movie> getSchedule()
+}
+
+
+class Data.WebScraping.YelmoScraper {
+- String baseUrl
+- String city
++ List<Movie> getSchedule()
+}
+
+
+class Controller.DashBoardDataController {
+- MoviesDataApi moviesDataApi
+- Gson gson
++ void handle(HttpExchange)
+}
+
+
+class Controller.MovieCatalogController {
+- MoviesDataApi moviesDataApi
+~ TMDBApi tmdb
+- Gson gson
++ void handle(HttpExchange)
+}
+
+
+class Server {
++ {static} void main(String[])
+}
+
+class Data.WebScraping.TaquillaESP {
+- String baseUrl
++ List<Movie> getYearRanking()
++ Movie getFirstMovieTitle()
++ List<String[]> getYearRevenueData()
++ Movie getMostViewedSpanishMovie()
+}
+
+
+class Model.Message {
+- String content
++ String getContent()
++ void setContent(String)
+}
+
+
+
+
+Data.WebScraping.MovieScraper <|.. Data.WebScraping.MTenerifeScraper
+Data.WebScraping.BaseScraper <|-- Data.WebScraping.MTenerifeScraper
+Data.WebScraping.MovieScraper <|.. Data.WebScraping.YelmoScraper
+Data.WebScraping.BaseScraper <|-- Data.WebScraping.YelmoScraper
+com.sun.net.httpserver.HttpHandler <|.. Controller.DashBoardDataController
+com.sun.net.httpserver.HttpHandler <|.. Controller.MovieCatalogController
+Data.WebScraping.BaseScraper <|-- Data.WebScraping.TaquillaESP
+@enduml
