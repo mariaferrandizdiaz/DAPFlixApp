@@ -25,7 +25,7 @@ El sistema desarrollado, DAPFlix, permite gestionar información de plataformas 
 - Patrón Singleton
 - Patrón Factory Method
 
-## Instrucciones para la ejecución
+## ⚙️ Instrucciones para la ejecución
 
 ### Añadir las librerías
 
