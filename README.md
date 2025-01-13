@@ -45,3 +45,6 @@ Enlace a los drivers [ChromeDriver](https://github.com/dreamshao/chromedriver/tr
 
 ## 🌐 Referencias
 [Presentación](https://drive.google.com/file/d/1-4N7aGEkwoohbXQrvM1uBypJXpaYpIig/view?usp=drive_link)
+[Taquilla España](https://www.taquillaespana.es/})
+[The Movie DataBase](https://developers.themoviedb.org/3)
+[Selenium](https://www.selenium.dev/documentation/)
